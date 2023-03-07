@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home'%}">SuperShop</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link" href="{% url 'advertisements' 1%}">Ogloszenia</a>
+        {%if request.user.is_authenticated%}
+        <a class="nav-link" href="{% url 'create_advertisement'%}"> Nowe ogloszenie</a>
+        <a class="nav-link" href="{% url 'create_product'%}"> Nowy produkt</a>
+        {%endif%}
+        <li class="nav-item">
+          {%block nav%} {%endblock%}
+      </div>
+    </div>
+  </div>
+
+  {%if request.user.is_authenticated%}
+  {% if '/profile/' not in request.path %}
+  <span style="padding-right:10px;"><a href="{% url 'user_profile' request.user.shopuser.id%}"
+      class="text-decoration-none">Profil </a></span>
+  {%endif%}
+  <span style="padding-right:10px;"><a href="{% url 'logoutPage'%}" class="text-decoration-none">Wyloguj </a></span>
+  {%else%}
+  <span style="padding-right:10px;"><a href="{% url 'registrationPage'%}" class="text-decoration-none">Rejestracja
+    </a></span>
+  <span style="padding-right:10px;"><a href="{% url 'login_page'%}" class="text-decoration-none">Zaloguj </a></span>
+  {%endif%}
+
+</nav>

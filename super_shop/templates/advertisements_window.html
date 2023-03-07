@@ -1,0 +1,72 @@
+{% extends 'base.html'%}
+{% load tags %}
+
+{%block title%} {{adv.title}} {%endblock%}
+
+{%block content%}
+
+<div class="container">
+
+
+  <div class="row m-4 p-2 text-center" style="background-color:grey;
+  -webkit-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+  -moz-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+  box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);">
+
+    <div class="col-4  m-1 " style="min-height:600px;background-color:rgb(94, 210, 65);
+    -webkit-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+    box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);">
+
+      <ul class="list-group p-2 mt-auto ">
+        <li class="list-group-item">{{adv.title}}</li>
+        <li class="list-group-item">{{adv.description_adv}}</li>
+        <li class="list-group-item">Data: {{adv.date_created}} </li>
+        <li class="list-group-item">Cena: <b>{{adv.products.all|sum_query_list}} PLN</b></li>
+        <hr>
+        <div class="p-1 item-center">
+          {% if adv.shopuser.user != request.user%}
+          <a href="{% url 'buy' adv.id%}"><button type="button" class="btn btn-primary">Kup</button></a>
+          <button type="button" class="btn btn-primary">placeholder</button>
+          <button type="button" class="btn btn-warning ">Napisz do sprzedawcy</button>
+          {%endif%}
+        </div>
+        <hr>
+        <li class="list-group-item" style="font-size: 28px;">Sprzedawca: {{adv.shopuser.username}}
+          <img src="{{adv.shopuser.profile_img.url}}" style="max-width: 50px; max-height: 50px; float:right;" /></li>
+        <li class="list-group-item">Zadzwon: {{adv.shopuser.phone}} </li>
+
+      </ul>
+    </div>
+
+
+    <div class="col-4 m-1" style="position: relative;background-color:rgb(178, 182, 76); 
+-webkit-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+-moz-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);">
+
+      {% for product in adv.products.all%}
+      <ul class="list-group p-2 m-2">
+        <li class="list-group-item">Produkt: {{product.name}}</li>
+        <li class="list-group-item">Cena: {{product.price}} PLN </li>
+        <li class="list-group-item">Opis: {{product.description_product}} </li>
+      </ul>
+      {%endfor%}
+
+    </div>
+
+
+    <div class="col-3  m-1" style="min-width:380px;background-color:rgb(137, 51, 51);
+    -webkit-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+    box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);">
+
+      {% for product in adv.products.all%}
+      <img class="m-3" src="{{product.image.url}}" style="max-width: 330px; max-height: 580px;" />
+      {%endfor%}
+    </div>
+  </div>
+</div>
+
+{%endblock%}
+

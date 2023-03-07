@@ -1,0 +1,79 @@
+{% extends 'base.html'%}
+{% load tags %}
+
+{%block title%} {{user.name}} {%endblock%}
+
+{%block content%}
+
+<div class="container">
+    <div class="row">
+      <div class="col-6">
+  
+        <div class="card text-bg-secondary mx-auto mt-4 p-4 text-center" id="grey_card" style="max-width: 50rem;background-color:grey;-webkit-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+              -moz-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+              box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);">
+          <div class="row">
+            <div class="col-6">
+              <div class="card text-bg-secondary mx-auto mt-2 p-4 text-center" id="grey_card" style="min-height:250px;max-width: 24rem;
+                      background-color: rgba(204, 105, 115, 1);">
+                <img src="{{user.profile_img.url}}" />
+              </div>
+            </div>
+  
+            <div class="col-6">
+              <div class="card text-bg-secondary mx-auto mt-2 p-4 text-center" id="grey_card" style="min-height:250px;max-width: 24rem;
+                  background-color: rgba(209, 176, 69, 1);">
+                <h5 class="h5">Uzytkownik:<h5>
+                    {{user.user.username}}<br>
+                    <hr>
+                    <h5 class="h5">E-MAIL:<h5>
+                        <p style="font-size:15px;">{{user.user.email}}</p>
+                        <a href="#"><button name="change_data"
+                            class="btn btn-primary mt-3">Napisz</button></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-6">
+        <div class="card text-bg-secondary mx-auto mt-4 p-4 text-center" style="max-width: 50rem;background-color:grey;-webkit-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+              -moz-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+              box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);">
+        </div>
+      </div>
+
+    </div>
+      <div class="row">
+  
+        <div class="col-12 text-center">
+          <p class="h4 mt-4">Ogloszenia</p>
+          <div class="card text-bg-secondary mt-4  text-center" 
+            style="background-color:grey;-webkit-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+              -moz-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+              box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);">
+  
+          <table class="table table-striped ">
+            <thead>
+              <tr>
+                <th scope="col">Adv Nr</th>
+                <th scope="col">Tytuł</th>
+                <th scope="col">Cena</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for adv in advertisements%}
+              <tr>
+                <th scope="row">{{adv.id}}</th>
+                <td>{{adv.title}}</td>
+                <td>{{adv.products.all|sum_query_list}}</td>
+              </tr>
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <hr class="mt-4">
+    </div>
+  
+{%endblock%}

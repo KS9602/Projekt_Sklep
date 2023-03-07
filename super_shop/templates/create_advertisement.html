@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+
+
+{%block title%} Nowe Ogloszenie {%endblock%}
+
+{%block content%}
+
+
+
+<div class="card text-bg-secondary mx-auto mt-4 p-4 text-center" style="max-width: 50rem;background-color:grey;-webkit-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+-moz-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);">
+    <form action="" method="POST">
+    {% csrf_token %}
+        
+    {{form.title.label}} {{form.title}} <hr>
+    {{form.description_adv.label}}<br>{{form.description_adv}}<br>
+    {{form.available.label}}&nbsp;&nbsp;{{form.available}} <br>
+    {{form.products}}
+    
+    
+    <hr>
+    <button type="submit" name="Create User" class="btn btn-primary">SEND</button>
+    </form>
+  </div>
+
+
+
+{%endblock%}

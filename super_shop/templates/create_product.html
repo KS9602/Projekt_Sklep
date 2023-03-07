@@ -1,0 +1,38 @@
+{% extends 'base.html'%}
+
+
+{%block title%} Nowy Produkt {%endblock%}
+
+{%block content%}
+<div class="card text-bg-secondary mx-auto mt-4 p-4 text-center" style="max-width: 600px;background-color:grey;-webkit-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+-moz-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);">
+    <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {{form.name.label}}{{form.name}} <br><br>
+    {{form.quantity.label}} {{form.quantity}}     {{form.price.label}}&nbsp;&nbsp;&nbsp;&nbsp; {{form.price}}<br>
+      <hr>
+    {{form.description_product.label}}<br>{{form.description_product}} <br>
+    {{form.image}}<br><br>
+    
+    {{form.tag.label}}&nbsp;&nbsp;&nbsp;&nbsp; {{form.tag}}     {{form.status.label}} {{form.status}} <br>
+    
+
+    <hr>
+    <button type="submit" name="create_product" class="btn btn-primary">SEND</button>
+    </form>
+
+    
+
+    {%if messages%}
+        {%for message in messages%}
+        <div class="alert alert-info mt-3" role="alert">{{message}}</div>
+        {%endfor%}
+    {% endif %}
+
+  </div>
+
+
+
+{%endblock%}

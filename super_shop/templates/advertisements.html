@@ -1,0 +1,77 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{%block title%} Ogloszenia {%endblock%}
+
+{%block content%}
+
+<div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-4">
+        <form method="GET">
+            <span class="text-muted">{{filter.form}}</span>
+            <button type="submit" class="btn btn-secondary btn-sm ">Small button</button>
+        </form>
+    </div>
+</div>
+<nav class="navbar navbar-dark " style="background-color: rgba(48, 111, 162, 1)">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+            aria-expanded="false" aria-label="Toggle navigation"> Filtruj
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+
+<div class="container">
+    {% for adv in site%}
+
+    {%if forloop.first or forloop.counter|divisibleby:4  %}
+
+    <div class="row">
+        {%endif%}
+
+        <div class="col-4">
+            <div class="card text-bg-secondary mx-auto mt-4 p-3 text-center" style="min-height:200px;max-height:200px;min-width: 400px;max-width: 400px;
+            background-color:grey;-webkit-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+            -moz-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+            box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);">
+                <div class="row">
+                    <div class="col-8">
+                        <b><a class="link-info" href="{% url 'advertisements_window' adv.id%}"
+                                style="text-decoration: none;font-size: 25px;">{{adv.title}}</a></b>
+                        <hr class="mt-1">
+
+                        {{adv.description_adv|slice:":88"}}
+                    </div>
+
+                    <div class="col-4">
+                        <img src="{{adv.products.first.image.url}}" class="img-fluid text-center"
+                            style="max-width: 110px;max-height: 170px;" alt="Responsive image" />
+                        <p>{{adv.date_created|date:"d-m-Y"}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {%endfor%}
+    </div>
+
+    {% if counter|length > 1%}
+
+    <footer class="fixed-bottom">
+        <div class="contaienr  mx-auto d-flex justify-content-center ">
+            <nav aria-label="...">
+                <ul class="pagination pagination-lg  ">
+
+                    {% for i in counter %}
+                    <li class="page-item"><a class="page-link" href="{% url 'advertisements' i%}">{{i}}</a></li>
+                    {%endfor%}
+                </ul>
+            </nav>
+        </div>
+    </footer>
+
+    {%endif%}
+
+    {%endblock%}
